@@ -12,3 +12,4 @@ function min(a,b)
     }
 }
 console.log(min(a,b));
+
