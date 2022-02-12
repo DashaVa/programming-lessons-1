@@ -10,5 +10,8 @@ let d=Symbol('//')
 console.log(typeof d,d)
 let g;
 console.log(typeof g,g);
-
+let t=null;
+console.log(typeof t,t)
+function jhgb(){}
+console.log(typeof jhgb,jhgb)
 
