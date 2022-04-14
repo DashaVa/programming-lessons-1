@@ -16,12 +16,14 @@ fs.writeFile('code.json',json,(err)=>{
         let mas = Object.fromEntries(
            Object.entries(arr).map(([key,value])=>[key,value])
         );
+        var i= prompt("Введите число:  ")
+        if (i<200){
         console.log(typeof(mas));
-        console.log(mas[0]);
-        var string = JSON.stringify(mas[0])
+        console.log(mas[i]);
+        var string = JSON.stringify(mas[i])
 const requestHandler = (request, response) => {
     response.setHeader("Content-Type", "text/html; charset=utf-8;");
-    if (request.url === "/todos/1" || request.url === "/") {
+    if (request.url === "/todos/" + i || request.url === "/") {
         response.write(string);
         fs.appendFileSync("hello.txt","переход в home\n");
     } else if (request.url == "/about") {
@@ -32,7 +34,7 @@ const requestHandler = (request, response) => {
     }
     response.end();
 };
-http.createServer(requestHandler).listen(3000); 
+http.createServer(requestHandler).listen(3000); }
         //var counter = 0;
         //for (let key of Object.values(arr)){
 //console.log(key);
@@ -44,5 +46,6 @@ http.createServer(requestHandler).listen(3000);
 
         //console.log(json.search('delectus'))
     })
+
 })
 .catch(e => console.error(e))
