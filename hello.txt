@@ -4,3 +4,5 @@
 переход в home
 переход в contacts
 переход в contacts
+переход в about
+переход в home
