@@ -1,21 +1,48 @@
-var fetch = require ('node-fetch');
 const fs = require('fs');
-const cheerio = require('cheerio');
-const path = require('path');
-async function downloadIBB(pageUrl, folder){
-  const res = await fetch(pageUrl);
-  const page = await res.text();
-  const $ = cheerio.load(page);
-  const imgUrl = $('link[rel="image_src"]').attr('href');
-  const filename = path.basename(imgUrl);
-  const filepath = path.join(folder,filename);
-  const imgRes = await fetch(imgUrl);
-  return new Promise(res=>{
-    filestream = fs.createWriteStream(filepath);
-    imgRes.body.pipe(filestream);
-    filestream.on('finish',()=>res(filepath));
-  });
+const Path = require('path');  
+const axios = require('axios');
+const http = require('http');
+const fetch = require('node-fetch');
+const express = require('express');
+const app = express();
+for (var x=100; x<600; x++){
+let url = 'https://http.cat/'+x+'.jpg'
+let request = fetch(url);
+request
+.then(request=>{
+  if (request.ok){
+    axios.get(url,{responseType: 'arraybuffer'}) 
+  .then (res=> {
+    
+    const pict = res.data;
+    
+    //fs.mkdir('cats'+x, err =>{
+      //if (err) throw err;
+      //console.log('Папка создана');
+      fs.writeFile('picture'+x+'.jpg',pict,(err)=>{
+        if (err) throw err;
+        console.log('well done');
+    });
+  })
+  }else{
+    console.log('Ccылка '+url+' не существует')
+  }
+})
+.catch(error=>{
+  console.log(error)
+})
+  //const pict = res.data;
+  
+  //fs.mkdir('cats'+x, err =>{
+    //if (err) throw err;
+    //console.log('Папка создана');
+    //fs.writeFile('picture'+x+'.jpg',pict,(err)=>{
+      //if (err) return reject(err);
+      //console.log('well done');
+  //});
+//})
+//.catch(err=>{
+  //console.error(err)
+//})
+//})
 }
-downloadIBB(' https://http.cat','/tmp')
-   .then((path)=>console.log(path))
-   .catch(err=>console.error(err));
