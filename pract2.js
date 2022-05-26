@@ -13,24 +13,11 @@ axios.get('https://jsonplaceholder.typicode.com/todos')
     fs.writeFile('code.json',json,(err)=>{
             if (err) return reject(err);
             console.log('wrote');
-            let arr = JSON.parse(json)
-            console.log(typeof(arr));
-            console.log(arr[5]);
-            app.set('port', process.env.PORT || 3000);
             
-   app.use(function (req, res) {
-    
-      res.type('text/plain');
-        res.send(arr[5]);
-    });
-    app.listen(app.get('port'), function () {
-        console.log('Express запущен на http://localhost:' +
-            app.get('port') + '; нажмите Ctrl+C для завершения.');
-    });
-            return arr;
+    })
         
     })
-        })
+        
             
 
     
@@ -57,3 +44,30 @@ axios.get('https://jsonplaceholder.typicode.com/todos')
 //http.createServer(requestHandler).listen(3000); 
 
 .catch(e => console.error(e))
+app.set('port', process.env.PORT || 3000);
+  app.get('/todos/:id',(req,res)=>{
+      fs.readFile('code.json','utf8',function (error,data){
+          if(err){
+              console.error(err)
+              return
+          }
+          let arr = JSON.parse(json)
+            console.log(typeof(arr));
+            console.log(arr[5]);
+            digit = 13;
+            array = arr[digit];
+            console.log(array);
+            console.log('sucess');
+            res.send(arr[req.params.id]);
+      }
+  }        
+   app.use(function (req, res) {
+    
+      res.type('text/plain');
+        res.send(arr[5]);
+    });
+    app.listen(app.get('port'), function () {
+        console.log('Express запущен на http://localhost:' +
+            app.get('port') + '; нажмите Ctrl+C для завершения.');
+    });
+            
