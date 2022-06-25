@@ -50,7 +50,8 @@ axios.get("https://jsonplaceholder.typicode.com/todos").then(
     .catch(function (error) {
         console.log(error);
     })
-app.get('/todos/:id', (req, res) => {
+    url = 'http://localhost:3000'
+app.get(url, (req, res) => {
 
     fs.readFile('todos1.json', 'utf8', function (error, data) {
         if (error) {
